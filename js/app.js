@@ -94,12 +94,12 @@ var ViewModel = function() {
 			mapTypeControl: false
 		});
 
-		// Style the markers a bit. This will be our listing marker icon.
+		
 		var defaultIcon = makeMarkerIcon('0091ff');
 
-		// Create a "highlighted location" marker color for when the user
-		// mouses over the marker.
 		var highlightedIcon = makeMarkerIcon('FFFF24');
+		
+		var clickedIcon = makeMarkerIcon('ecb4a4');
 
 		client_id ="KKI0AMUBBTASBZ1DGBOWKHBY3ZUE24TSGXNHIWGPWU34BACZ";
 		client_secret ="MH2V0KQ3MQMOEYLEVSXI1MMNLPB4GDUCZFGPQLFB0PUZ5HPP";
@@ -111,9 +111,6 @@ var ViewModel = function() {
 		var locations =[];
 		var largeInfowindow = new google.maps.InfoWindow();
 		var bounds = new google.maps.LatLngBounds();
-		var searchBox = new google.maps.places.SearchBox(
-				document.getElementById('places-search'));
-		searchBox.setBounds(map.getBounds());
 
 		var foursquareTimeout = setTimeout(function(){
 			$errorHeader.text("Foursquare data could not be loaded");
@@ -201,7 +198,10 @@ var ViewModel = function() {
 
 						// Create an onclick event to open an infowindow at each marker.
 						marker.addListener('click', function() {
+							$("#menu").hide();
 							self.populateInfoWindow(this, largeInfowindow);
+							//$("#menu").fadeToggle("200");
+							this.setIcon(clickedIcon);
 						});
 						marker.addListener('mouseover', function() {
 							this.setIcon(highlightedIcon);
