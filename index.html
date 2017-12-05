@@ -12,10 +12,10 @@
 	<!-- <button class="cross">&#735;</button>-->
 		<div id="menu" class="onclick-menu-content">
 			<h3>Fancy Restaurants in San Fransisco</h3>
-			 
+			 <h3 id="error-header"></h3>
 			<div id="location-menu">
 				<div>
-					<h3 id="error-header"></h3>
+
 					<input id="places-search" class="input-text" type="text"
 						placeholder="Search for nearby restaurants in San Fransisco" data-bind="textInput: searchInput" size="50">
 					<hr>
@@ -34,7 +34,7 @@
 	<script src="js/lib/jquery.min.js"></script>
 	<script src="js/app.js"></script>
 	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWzo9rJ4pbllctbtfLtWzDR6aIOetdfS4&libraries=places&v=3&callback=model.initMap" onerror="mapLoadingError()">
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWzo9rJ4pbllctbtfLtWzDR6aIOetdfS4&libraries=places,geometry,drawing&v=3&callback=model.initMap" onerror="mapLoadingError()">
 			</script>
 </body>
 </html>

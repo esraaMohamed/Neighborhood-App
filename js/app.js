@@ -94,11 +94,11 @@ var ViewModel = function() {
 			mapTypeControl: false
 		});
 
-		
+
 		var defaultIcon = makeMarkerIcon('0091ff');
 
 		var highlightedIcon = makeMarkerIcon('FFFF24');
-		
+
 		var clickedIcon = makeMarkerIcon('ecb4a4');
 
 		client_id ="KKI0AMUBBTASBZ1DGBOWKHBY3ZUE24TSGXNHIWGPWU34BACZ";
@@ -106,15 +106,11 @@ var ViewModel = function() {
 		var $city = "San Fransisco";
 		var $establishment = "Restaurant";
 		var $listElements = $('#list-items');
-		var $errorHeader = $('error-header');
+		var $errorHeader = $('#error-header');
 		var url = "https://api.foursquare.com/v2/venues/explore?near="+$city+"&query="+$establishment+"&client_id="+client_id+"&client_secret="+client_secret+"&v=20171202";
 		var locations =[];
 		var largeInfowindow = new google.maps.InfoWindow();
 		var bounds = new google.maps.LatLngBounds();
-
-		var foursquareTimeout = setTimeout(function(){
-			$errorHeader.text("Foursquare data could not be loaded");
-		}, 8000);
 
 		$.ajax({
 			url: url,
@@ -212,7 +208,7 @@ var ViewModel = function() {
 
 						});
 
-						var location = {id: venue_id, title:title, location:position, address: formattedAddress, 
+						var location = {id: venue_id, title:title, location:position, address: formattedAddress,
 								price:{message, currencySymbol}, rating: rating, url: url, isOpen: shop_open, marker: marker};
 						locations.push(location);
 					}
@@ -220,13 +216,13 @@ var ViewModel = function() {
 				locations.forEach(function(locationItem){
 					self.myLocations.push(new Locations(locationItem));
 				});
-				clearTimeout(foursquareTimeout);
-
 			}
-		}); 
+		}).fail(function (jqXHR, textStatus) {
+			$errorHeader.text("Foursquare data could not be loaded");
+		});
 	};
-	
-	
+
+
 	$("#hamburger-menu").click(function() {
 		$("#menu").fadeToggle("200");
 	});
@@ -247,7 +243,7 @@ var ViewModel = function() {
 	this.populateInfoWindow = function(marker, infowindow) {
 		if (infowindow.marker != marker) {
 			infowindow.marker = marker;
-			marker.setAnimation(google.maps.Animation.DROP); 
+			marker.setAnimation(google.maps.Animation.DROP);
 			var innerHTML = '<div>';
 			innerHTML += '<strong>' + marker.title + '</strong>';
 			innerHTML += '<br>' + marker.address;
@@ -294,13 +290,11 @@ var ViewModel = function() {
 	self.listItemClicked = function(venue) {
 		google.maps.event.trigger(venue.marker, 'click');
 	};
-
-	// error message if map does not load
-	function mapLoadingError() {
-		alert("Google Map was unable to load... Please try again");
-	};
-
 };
 
+//error message if map does not load
+function mapLoadingError() {
+	alert("Google Map was unable to load... Please try again");
+};
 var model = new ViewModel();
 ko.applyBindings(model);
