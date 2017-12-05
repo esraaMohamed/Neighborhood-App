@@ -1,0 +1,92 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-family: cursive, sans-serif, Arial;
+}
+
+h3 {
+	text-align: center;
+}
+
+.container {
+	height: 100%;
+	position: relative;
+}
+
+#list-items {
+	height: 720px;
+	overflow-y: scroll;
+}
+
+#map {
+	bottom: 0px;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	right: 0px;
+}
+
+.hamburger {
+	background: white;
+	position: relative;
+	top: 0;
+	right: 0;
+	line-height: 45px;
+	padding: 5px 15px 0px 15px;
+	color: #000000;
+	border: 0;
+	font-size: 1.4em;
+	font-weight: bold;
+	cursor: pointer;
+	outline: none;
+	z-index: 10000000000000;
+}
+
+#menu {
+	background-color: #ecb4a4;
+	float: left;
+	height: 100%;
+	text-align: left;
+}
+
+.input-text {
+	padding-left: 10px;
+	padding-right: 0;
+	font-family: inherit;
+}
+
+.hamburger:focus .onclick-menu-content {
+	display: block;
+}
+
+.onclick-menu-content {
+	position: relative;
+	z-index: 1;
+	display: none;
+}
+
+@media screen and (max-width: 765px) {
+	.map-wrapper {
+		width: 65%;
+		margin-left: 35%;
+	}
+	.map-wrapper {
+		width: 100%;
+		margin: 0;
+	}
+	#list-items {
+		background-color: #ecb4a4;
+		float: left;
+		height: 500px;
+		text-align: left;
+		overflow-y: scroll;
+	}
+	
+	#map {
+	bottom: 0px;
+	height: 100%;
+	width: 100%;
+	right: 0px;
+}
+}
